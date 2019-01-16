@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="txt_celsius">°C</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="activity_settings_tv_enter_your_city">Enter Your City:</string>
+    <string name="activity_settings_btn_save_city">Save City</string>
+</resources>

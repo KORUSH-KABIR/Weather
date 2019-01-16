@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#075e54</color>
+    <color name="colorPrimaryDark">#075e54</color>
+    <color name="colorAccent">#075e54</color>
+    <color name="colorLightPrimary">#f8bbd0</color>
+    <color name="colorTextIcons">#ffffff</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorDivider">#bdbdbd</color>
+
+    <color name="black">#000</color>
+    <color name="white">#ffffff</color>
+    <color name="black_lite">#757575</color>
+
+    <color name="gray50">#FAFAFA</color>
+    <color name="gray100">#F5F5F5</color>
+    <color name="gray200">#EEEEEE</color>
+    <color name="gray300">#E0E0E0</color>
+    <color name="gray400">#BDBDBD</color>
+    <color name="gray500">#9E9E9E</color>
+    <color name="gray600">#757575</color>
+    <color name="gray700">#616161</color>
+    <color name="gray800">#424242</color>
+    <color name="gray900">#212121</color>
+
+    <color name="award_active_light">#00c853</color>
+    <color name="award_active">#307633</color>
+
+    <color name="blue">#01c6db</color>
+    <color name="color1">#cc3b3b</color>
+    <color name="color2">#cc3b77</color>
+    <color name="color3">#3b7fcc</color>
+    <color name="color4">#303030</color>
+    <color name="color5">#3bcc7c</color>
+    <color name="color6">#00a345</color>
+    <color name="color7">#1dbea5</color>
+
+    <color name="bg_screen1">#7e7e7e</color>
+    <color name="bg_screen2">#e91e63</color>
+    <color name="bg_screen3">#EF6C00</color>
+    <color name="bg_screen4">#3f51b5</color>
+    <color name="bg_screen5">#4caf50</color>
+    <color name="bg_screen6">#009688</color>
+
+</resources>
