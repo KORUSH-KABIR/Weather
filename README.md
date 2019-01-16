@@ -1,1 +1,3 @@
-# Weather
+# Weather Project
+
+MFTV Final Project
