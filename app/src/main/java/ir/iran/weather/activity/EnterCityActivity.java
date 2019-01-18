@@ -53,24 +53,30 @@ public class EnterCityActivity extends SetupActivity {
         initButton();
     }
 
+    /**
+     * قابلیت کلیک روی دکمه ذخیره را برسی میکند
+     */
     private void initButton(){
 
         btnSaveCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edtCity.getText().toString().equals("")){
+                if(edtCity.getText().toString().equals("")){ // اگر مقدار ورودی شهر خالی باشد
                     edtCity.setError("City is Empty");
                 }
                 else {
 
+                    // شهر را ذخیره کرده
                     preference.writeString(
                             CITY_KEY,
                             edtCity.getText().toString()
                     );
 
+                    // و به اکتیویتی قبلی با مقدار صحیح باز میگردد
                     Intent intent = new Intent();
                     setResult(Activity.RESULT_OK , intent);
                     finish();
+                    // تنظیم انیمیشن برای تغییر صفحه
                     overridePendingTransition(R.anim.animate_enter_to_activity, R.anim.animate_exit_of_activity);
                 }
             }
