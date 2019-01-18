@@ -1,17 +1,20 @@
 package ir.iran.weather.activity;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +35,13 @@ import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator;
 public class MainActivity extends SetupActivity {
 
     private static final String STATE_CHECKER = "checker";
-    private static final String STATE_OPENED = "opened";
     private static final String CITY_KEY = "City Location";
     private static final int SETTINGS_REQUEST_CODE = 100;
     private SharedPreferenceUtils preference;
-    private ImageView iconText , exit , refresh;
+    private CardView toolbar;
+    private RelativeLayout layoutToolbarBase , layoutToolbarSearch;
+    private boolean toolbarState = false;
+    private ImageView iconText , exit , search , closeToolbarCity , btnSearch;
     private TextView temp , city , textWeather , speed , humidity , sunrise , sunset;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
@@ -53,7 +58,7 @@ public class MainActivity extends SetupActivity {
     private void initCity(){
 
         if(getCity().equals("")){
-            initIntent(STATE_CHECKER);
+            initIntent();
         }
         else {
             getResponseFromServer(getCity());
@@ -69,18 +74,23 @@ public class MainActivity extends SetupActivity {
 
     private void init(){
 
-        refresh      = findViewById(R.id.refresh);
-        recyclerView = findViewById(R.id.recyclerView);
-        temp         = findViewById(R.id.temp);
-        city         = findViewById(R.id.city);
-        iconText     = findViewById(R.id.iconText);
-        textWeather  = findViewById(R.id.textWeather);
-        speed        = findViewById(R.id.speed);
-        humidity     = findViewById(R.id.humidity);
-        sunrise      = findViewById(R.id.sunrise);
-        sunset       = findViewById(R.id.sunset);
-        fab          = findViewById(R.id.floatActionButton);
-        exit         = findViewById(R.id.exit);
+        layoutToolbarBase      = findViewById(R.id.layoutToolbarBase);
+        layoutToolbarSearch    = findViewById(R.id.layoutToolbarSearch);
+        toolbar                = findViewById(R.id.toolbar);
+        search                 = findViewById(R.id.search);
+        closeToolbarCity       = findViewById(R.id.closeToolbarCity);
+        btnSearch              = findViewById(R.id.btnSearch);
+        recyclerView           = findViewById(R.id.recyclerView);
+        temp                   = findViewById(R.id.temp);
+        city                   = findViewById(R.id.city);
+        iconText               = findViewById(R.id.iconText);
+        textWeather            = findViewById(R.id.textWeather);
+        speed                  = findViewById(R.id.speed);
+        humidity               = findViewById(R.id.humidity);
+        sunrise                = findViewById(R.id.sunrise);
+        sunset                 = findViewById(R.id.sunset);
+        fab                    = findViewById(R.id.floatActionButton);
+        exit                   = findViewById(R.id.exit);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(
                 this , LinearLayoutManager.VERTICAL , false));
@@ -131,7 +141,7 @@ public class MainActivity extends SetupActivity {
                                 if(result.equalsIgnoreCase("null")){
                                     Toast.makeText(MainActivity.this, "the city in question was not found", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
-                                    initIntent(STATE_CHECKER);
+                                    initIntent();
                                 }
                                 else {
                                     Gson gson = new Gson();
@@ -207,14 +217,28 @@ public class MainActivity extends SetupActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                initIntent(STATE_OPENED);
+                getResponseFromServer(getCity());
             }
         });
 
-        refresh.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getResponseFromServer(getCity());
+                toolbarAnimationStart();
+            }
+        });
+
+        closeToolbarCity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbarAnimationStart();
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
 
@@ -224,6 +248,130 @@ public class MainActivity extends SetupActivity {
                 finish();
             }
         });
+    }
+
+    private void toolbarAnimationStart(){
+
+        toolbar.animate().setDuration(500)
+                .translationY(20)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        toolbarAnimationRotateOne();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .start();
+    }
+
+    private void toolbarAnimationRotateOne(){
+
+        toolbar.animate().setDuration(220)
+                .rotationX(90)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                        if(toolbarState){
+                            layoutToolbarSearch.setVisibility(View.GONE);
+                            layoutToolbarBase.setVisibility(View.VISIBLE);
+                            toolbarState = false;
+                        }
+                        else{
+                            layoutToolbarSearch.setVisibility(View.VISIBLE);
+                            layoutToolbarBase.setVisibility(View.GONE);
+                            toolbarState = true;
+                        }
+
+                        toolbarAnimationRotateTwo();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .start();
+    }
+
+    private void toolbarAnimationRotateTwo(){
+
+        toolbar.animate().setDuration(220)
+                .rotationX(0)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        toolbarAnimationEnd();
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .start();
+    }
+
+    private void toolbarAnimationEnd(){
+
+        toolbar.animate().setDuration(200)
+                .translationY(0)
+                .setListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                })
+                .start();
     }
 
     private void initDialog(){
@@ -236,10 +384,10 @@ public class MainActivity extends SetupActivity {
         dialog = builder.build();
     }
 
-    private void initIntent(String state){
+    private void initIntent(){
         startActivityForResult(
                 new Intent(MainActivity.this , SettingsActivity.class)
-                        .putExtra("state" , state) ,
+                        .putExtra("state" , STATE_CHECKER) ,
                 SETTINGS_REQUEST_CODE
         );
         overridePendingTransition(R.anim.animate_enter_to_activity, R.anim.animate_exit_of_activity);
@@ -275,7 +423,6 @@ public class MainActivity extends SetupActivity {
     }
 
     private boolean exitState = false;
-
     @Override
     public void onBackPressed() {
 

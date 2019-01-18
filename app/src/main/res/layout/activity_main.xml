@@ -25,6 +25,7 @@
         app:cardElevation="3dp">
 
         <RelativeLayout
+            android:id="@+id/layoutToolbarBase"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -37,7 +38,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
                 android:contentDescription="@string/app_name"
-                android:padding="3dp"
+                android:padding="5dp"
                 android:src="@mipmap/icon_launcher" />
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
-                android:layout_toStartOf="@+id/refresh"
+                android:layout_toStartOf="@+id/search"
                 android:layout_toEndOf="@+id/menu"
                 android:text="@string/app_name"
                 android:textColor="@color/colorPrimary"
@@ -54,7 +55,7 @@
                 tools:ignore="RelativeOverlap" />
 
             <ImageView
-                android:id="@+id/refresh"
+                android:id="@+id/search"
                 style="@style/ClickableCircle"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -62,7 +63,8 @@
                 android:layout_toStartOf="@+id/exit"
                 android:contentDescription="@string/app_name"
                 android:padding="5dp"
-                android:src="@drawable/icon_refresh"
+                android:rotation="90"
+                android:src="@drawable/icon_search"
                 android:tint="@color/colorPrimary" />
 
             <ImageView
@@ -74,9 +76,59 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="5dp"
                 android:contentDescription="@string/app_name"
-                android:padding="7dp"
+                android:padding="8dp"
                 android:src="@drawable/icon_exit_run"
                 android:tint="@color/colorPrimary" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:visibility="invisible"
+            android:id="@+id/layoutToolbarSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/closeToolbarCity"
+                style="@style/ClickableCircle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:contentDescription="@string/app_name"
+                android:padding="5dp"
+                android:tint="@color/colorPrimary"
+                android:src="@drawable/icon_close" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:inputType="text"
+                android:layout_toStartOf="@+id/btnSearch"
+                android:layout_toEndOf="@+id/closeToolbarCity"
+                android:hint="@string/activity_main_edt_hint_enter_your_city"
+                android:textColorHint="@color/gray600"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                tools:ignore="Autofill" />
+
+            <ImageView
+                android:id="@+id/btnSearch"
+                style="@style/ClickableCircle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"
+                android:contentDescription="@string/app_name"
+                android:padding="5dp"
+                android:rotation="90"
+                android:src="@drawable/icon_search"
+                android:tint="@color/colorPrimary"/>
 
         </RelativeLayout>
 
@@ -362,7 +414,7 @@
         android:backgroundTint="@color/white"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/icon_settings"
+        android:src="@drawable/icon_refresh"
         android:tint="@color/colorPrimary"
         app:borderWidth="2dp"
         app:elevation="2dp"
