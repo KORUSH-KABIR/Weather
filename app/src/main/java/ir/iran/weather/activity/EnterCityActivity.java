@@ -13,7 +13,7 @@ import ir.aid.library.Frameworks.setup.SetupActivity;
 import ir.aid.library.Frameworks.utils.SharedPreferenceUtils;
 import ir.iran.weather.R;
 
-public class SettingsActivity extends SetupActivity {
+public class EnterCityActivity extends SetupActivity {
 
     private static final String CITY_KEY = "City Location";
     private SharedPreferenceUtils preference;
@@ -23,7 +23,7 @@ public class SettingsActivity extends SetupActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_enter_city);
         preference = new SharedPreferenceUtils(this);
         setNotificationBar();
         init();

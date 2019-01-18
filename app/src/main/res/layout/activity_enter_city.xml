@@ -9,7 +9,7 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
-    tools:context=".activity.SettingsActivity">
+    tools:context=".activity.EnterCityActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

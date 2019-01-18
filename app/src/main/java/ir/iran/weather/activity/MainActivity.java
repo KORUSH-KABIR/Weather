@@ -400,7 +400,7 @@ public class MainActivity extends SetupActivity {
 
     private void initIntent(){
         startActivityForResult(
-                new Intent(MainActivity.this , SettingsActivity.class)
+                new Intent(MainActivity.this , EnterCityActivity.class)
                         .putExtra("state" , STATE_CHECKER) ,
                 SETTINGS_REQUEST_CODE
         );
