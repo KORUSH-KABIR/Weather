@@ -39,11 +39,17 @@ public class EnterCityActivity extends SetupActivity {
         super.setNotificationBar();
     }
 
+    /**
+     * برای تنظیم فونت روی این اکتیویتی استفاده میکنیم
+     */
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
     }
 
+    /**
+     * تمام ویو ها را find میکنیم
+     */
     private void init() {
 
         edtCity = findViewById(R.id.edtCity);

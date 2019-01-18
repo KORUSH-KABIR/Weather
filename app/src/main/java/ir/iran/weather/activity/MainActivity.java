@@ -89,6 +89,9 @@ public class MainActivity extends SetupActivity {
         );
     }
 
+    /**
+     * تمام ویو ها را find میکنیم
+     */
     private void init(){
 
         layoutToolbarBase      = findViewById(R.id.layoutToolbarBase);
@@ -469,6 +472,9 @@ public class MainActivity extends SetupActivity {
         }
     }
 
+    /**
+     * برای تنظیم فونت روی این اکتیویتی استفاده میکنیم
+     */
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
