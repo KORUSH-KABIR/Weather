@@ -9,11 +9,11 @@ import android.os.Handler;
 import android.support.annotation.AnimRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -32,7 +32,9 @@ import ir.iran.weather.adapter.ForecastsAdapter;
 import ir.iran.weather.weatherAPI.WeatherPhoto;
 import ir.iran.weather.weatherAPI.YahooWeatherAPI;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator;
+import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
 public class MainActivity extends SetupActivity {
 
@@ -183,18 +185,29 @@ public class MainActivity extends SetupActivity {
 
         ForecastsAdapter adapter = new ForecastsAdapter(this, api);
 
+        // تمام اطلاهات دریافتی را از Api ورودی گرفته و در مقادیر های مورد نیاز نگهداری میکنیم
+
+        // اسم شهر جستوجو شده
         String cityName = api.getResult().getLocation().getCity();
+        // اسم کشور جستوجو شده
         String countryName = api.getResult().getLocation().getCountry();
+        // قرار دادن اسم شهر و کشور کنار هم دیگر
         String cityText = cityName + " , " + countryName;
 
-        String conditionTemp = String.valueOf((int) api.getResult().getCondition().getTemperature());
+        // دمای همین لحظه
+        String conditionTemp = String.valueOf((int) api.getResult().getCondition().getTemperature()); // یک عدد برمیگرداند پس به String کست میکنیم.
 
-        String speedSky = String.valueOf(api.getResult().getWind().getSpeed()) + " km/h";
-        String humiditySky = String.valueOf((int) api.getResult().getAtmosphere().getHumidity()) + " %";
+        // سرعت وزش باد
+        String speedSky = String.valueOf(api.getResult().getWind().getSpeed()) + " km/h"; // یک عدد برمیگرداند پس به String کست میکنیم.
+        // درصد رطوبت
+        String humiditySky = String.valueOf((int) api.getResult().getAtmosphere().getHumidity()) + " %"; // یک عدد برمیگرداند پس به String کست میکنیم.
 
+        // طلوع آفتاب
         String sunriseTime = api.getResult().getAstronomy().getSunrise();
+        // غروب آفتاب
         String sunsetTime = api.getResult().getAstronomy().getSunset();
 
+        // متن آب و هوای حال
         String weatherText = api.getResult().getCondition().getText();
 
         ///////////////////////////////////
@@ -203,33 +216,33 @@ public class MainActivity extends SetupActivity {
 
         ///////////////////////////////////
 
-        city.setText(cityText);
+        city.setText(cityText); // تنظیم شهر جستوجو شده روی ویو
         setAnimateForViews(city , R.anim.animate_city_title); // تنظیم انیمیشن برای این ویو
 
-        iconText.setImageDrawable(getResources().getDrawable(WeatherPhoto.getPhotoWeather(weatherText)));
+        iconText.setImageDrawable(getResources().getDrawable(WeatherPhoto.getPhotoWeather(weatherText)));  // تنظیم آیکون هوای شهر جستوجو شده روی ویو
         setAnimateForViews(iconText , R.anim.animate_icon_sky); // تنظیم انیمیشن برای این ویو
 
-        textWeather.setText(weatherText);
+        textWeather.setText(weatherText);  // تنظیم متن هوای شهر جستوجو شده روی ویو
         setAnimateForViews(textWeather , R.anim.animate_text_sky); // تنظیم انیمیشن برای این ویو
 
-        temp.setText(conditionTemp);
+        temp.setText(conditionTemp);  // تنظیم تنظیم دمای حال روی ویو
         setAnimateForViews(temp , R.anim.animate_temp); // تنظیم انیمیشن برای این ویو
 
-        speed.setText(speedSky);
-        humidity.setText(humiditySky);
-        sunrise.setText(sunriseTime);
-        sunset.setText(sunsetTime);
+        speed.setText(speedSky); // تنظیم سرعت باد روی ویو
+        humidity.setText(humiditySky); // تنظیم رطوبت هوا روی ویو
+        sunrise.setText(sunriseTime); // تنظیم طلوع آفتاب روی ویو
+        sunset.setText(sunsetTime); // تنظیم غروب آفتاب روی ویو
 
         //////// RecyclerView Animation ////////
 
-        ScaleInAnimationAdapter animationAdapter = new ScaleInAnimationAdapter(adapter);
-        animationAdapter.setDuration(200);
-        animationAdapter.setHasStableIds(true);
-        animationAdapter.setFirstOnly(false);
-        animationAdapter.setStartPosition(500);
+        SlideInLeftAnimationAdapter animationAdapter = new SlideInLeftAnimationAdapter(adapter); // یک نمونه از انیمیشن آداپتر
+        animationAdapter.setDuration(200); // مدن زمان انیمیشن
+        animationAdapter.setHasStableIds(true); // دارای یک id پایدار است یا خیر
+        animationAdapter.setFirstOnly(false); // فقط در لحظه ساخت اجرا شود یا خیر
+        animationAdapter.setInterpolator(new LinearInterpolator());
 
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(new ScaleInAnimationAdapter(animationAdapter));
+        recyclerView.setItemAnimator(new SlideInLeftAnimator()); // تنظیم انیمیشن آیتم ها
+        recyclerView.setAdapter(new ScaleInAnimationAdapter(animationAdapter)); // تنظیم آداپتر برای ریسایکلر ویو
     }
 
     /**
@@ -290,7 +303,7 @@ public class MainActivity extends SetupActivity {
 
     private void toolbarAnimationStart(){
 
-        toolbar.animate().setDuration(500)
+        toolbar.animate().setDuration(300)
                 .translationY(20)
                 .setListener(new Animator.AnimatorListener() {
                     @Override
