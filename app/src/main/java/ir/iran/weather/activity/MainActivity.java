@@ -53,20 +53,26 @@ public class MainActivity extends SetupActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        preference = new SharedPreferenceUtils(this);
-        init();
+        preference = new SharedPreferenceUtils(this); // ساخت یک نمونه از این کلاس برای استفاده از پرفرنس
+        init(); // تما ویو های داخل صفحه xml را find میکند
     }
 
+    /**
+     * مقدار قبلی پرفرنس را برسی میکند
+     */
     private void initCity(){
 
-        if(getCity().equals("")){
-            initIntent();
+        if(getCity().equals("")){ // برسی میکند که آیا شهری از قبل در پرفرنس ذخیره شده است یا خیر
+            initIntent(); // در صورت عدم وجود شهر به اکتیویتی بعدی میرود
         }
         else {
-            getResponseFromServer(getCity());
+            getResponseFromServer(getCity()); // اگر شهر وجود داشت پس اطلاعات آن را بارگیری میکند
         }
     }
 
+    /**
+     * اطلاعات داخل پرفرنس شهر را برمیگرداند
+     */
     private String getCity(){
         return preference.readString(
                 CITY_KEY,
@@ -135,11 +141,12 @@ public class MainActivity extends SetupActivity {
                             @Override
                             public void run() {
                                 if(reconnectCount < 5){
-                                    Toast.makeText(MainActivity.this, "Reconnect " + reconnectCount + 1, Toast.LENGTH_SHORT).show();
+                                    reconnectCount ++;
                                     initCity();
                                 }
                                 else {
-                                    Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                    Toast.makeText(MainActivity.this, result + " in 5 request. use of refresh button.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
