@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:supportsRtl">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +27,9 @@
 
         <activity
             android:name=".activity.EnterCityActivity"
-            android:theme="@style/noBackground"/>
+            android:theme="@style/noBackground"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
 
     </application>
 
