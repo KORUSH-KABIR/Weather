@@ -29,14 +29,9 @@ public class EnterCityActivity extends SetupActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_city);
+        setNotificationBar(); //  برای تمام صفحه کردن صفحه از کلاس والد گرفته میشود
         preference = new SharedPreferenceUtils(this);
-        setNotificationBar();
         init();
-    }
-
-    @Override
-    public void setNotificationBar() {
-        super.setNotificationBar();
     }
 
     /**

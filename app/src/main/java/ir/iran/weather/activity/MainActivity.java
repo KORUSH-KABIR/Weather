@@ -456,7 +456,7 @@ public class MainActivity extends SetupActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setNotificationBar();
+        setNotificationBar(); //  برای تمام صفحه کردن صفحه از کلاس والد گرفته میشود
         initDialog();
         initCity();
     }
@@ -478,11 +478,6 @@ public class MainActivity extends SetupActivity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
-    }
-
-    @Override
-    public void setNotificationBar() {
-        super.setNotificationBar();
     }
 
     private boolean exitState = false;
