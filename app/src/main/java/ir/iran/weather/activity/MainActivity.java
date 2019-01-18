@@ -35,13 +35,13 @@ import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator;
 
 public class MainActivity extends SetupActivity {
 
-    private static final String STATE_CHECKER = "checker";
     private static final String CITY_KEY = "City Location";
     private static final int SETTINGS_REQUEST_CODE = 100;
+    private boolean toolbarState = false;
+    private int reconnectCount = 0;
     private SharedPreferenceUtils preference;
     private CardView toolbar;
     private RelativeLayout layoutToolbarBase , layoutToolbarSearch;
-    private boolean toolbarState = false;
     private ImageView iconText , exit , search , closeToolbarCity , btnSearch;
     private TextView temp , city , textWeather , speed , humidity , sunrise , sunset;
     private EditText edtCity;
@@ -119,6 +119,10 @@ public class MainActivity extends SetupActivity {
 
         dialog.show();
 
+        if(toolbarState){
+            toolbarAnimationStart();
+        }
+
         String url = "http://phoenix-iran.ir/Files_php_App/WeatherApi/newApiWeather.php";
 
         new ConnectionHelper(url , 5000)
@@ -130,8 +134,13 @@ public class MainActivity extends SetupActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
-                                initCity();
+                                if(reconnectCount < 5){
+                                    Toast.makeText(MainActivity.this, "Reconnect " + reconnectCount + 1, Toast.LENGTH_SHORT).show();
+                                    initCity();
+                                }
+                                else {
+                                    Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                     }
@@ -251,6 +260,8 @@ public class MainActivity extends SetupActivity {
                             edtCity.getText().toString()
                     );
 
+                    edtCity.setText("");
+                    
                     getResponseFromServer(getCity());
                 }
             }
@@ -400,8 +411,7 @@ public class MainActivity extends SetupActivity {
 
     private void initIntent(){
         startActivityForResult(
-                new Intent(MainActivity.this , EnterCityActivity.class)
-                        .putExtra("state" , STATE_CHECKER) ,
+                new Intent(MainActivity.this , EnterCityActivity.class),
                 SETTINGS_REQUEST_CODE
         );
         overridePendingTransition(R.anim.animate_enter_to_activity, R.anim.animate_exit_of_activity);
