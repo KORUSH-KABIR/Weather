@@ -41,11 +41,6 @@
 
         <Button
             android:id="@+id/btnSaveCity"
-            android:text="@string/activity_settings_btn_save_city"
-            android:elevation="2dp"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtCity"
@@ -55,7 +50,13 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/background_btn"
             android:clickable="true"
-            android:focusable="true" />
+            android:elevation="2dp"
+            android:focusable="true"
+            android:text="@string/activity_settings_btn_save_city"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:targetApi="lollipop" />
 
     </RelativeLayout>
 
