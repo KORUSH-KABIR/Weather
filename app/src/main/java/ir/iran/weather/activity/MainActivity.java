@@ -63,7 +63,7 @@ public class MainActivity extends SetupActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preference = new SharedPreferenceUtils(this); // ساخت یک نمونه از این کلاس برای استفاده از پرفرنس
-        init(); // تما ویو های داخل صفحه xml را find میکند
+        init(); // تمام ویو های داخل صفحه xml را find میکند
     }
 
     /**

@@ -30,8 +30,8 @@ public class EnterCityActivity extends SetupActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_city);
         setNotificationBar(); //  برای تمام صفحه کردن صفحه از کلاس والد گرفته میشود
-        preference = new SharedPreferenceUtils(this);
-        init();
+        preference = new SharedPreferenceUtils(this); // ساخت یک نمونه از این کلاس برای استفاده از پرفرنس
+        init(); // تمام ویو های داخل صفحه xml را find میکند
     }
 
     /**
