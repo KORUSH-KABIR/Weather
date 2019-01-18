@@ -4,4 +4,5 @@
     <string name="activity_settings_tv_enter_your_city">Enter Your City:</string>
     <string name="activity_settings_btn_save_city">Save City</string>
     <string name="activity_main_edt_hint_enter_your_city">enter your city...</string>
+    <string name="dialog_wait_loading">..: Loading :..</string>
 </resources>

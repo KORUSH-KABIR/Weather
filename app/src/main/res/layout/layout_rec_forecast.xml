@@ -15,10 +15,10 @@
         app:cardElevation="1dp">
 
         <RelativeLayout
-            android:background="@drawable/background_row_item"
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/background_row_item"
+            android:gravity="center_vertical">
 
             <LinearLayout
                 android:id="@+id/l1"
@@ -46,6 +46,7 @@
                         android:layout_alignTop="@+id/tempHigh"
                         android:layout_marginTop="2dp"
                         android:layout_toEndOf="@+id/tempHigh"
+                        android:layout_toRightOf="@+id/tempHigh"
                         android:padding="2dp"
                         android:text="@string/txt_celsius"
                         android:textColor="@color/gray100"
@@ -56,6 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:padding="2dp"
                         android:textColor="@color/gray100"
@@ -72,7 +74,9 @@
                 android:layout_height="1dp"
                 android:layout_below="@+id/l1"
                 android:layout_alignStart="@+id/l2"
+                android:layout_alignLeft="@+id/l2"
                 android:layout_alignEnd="@+id/l1"
+                android:layout_alignRight="@+id/l1"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:alpha="0.7"
@@ -105,6 +109,7 @@
                         android:layout_alignTop="@+id/tempLow"
                         android:layout_marginTop="2dp"
                         android:layout_toEndOf="@+id/tempLow"
+                        android:layout_toRightOf="@+id/tempLow"
                         android:padding="2dp"
                         android:text="@string/txt_celsius"
                         android:textColor="@color/gray100"
@@ -115,6 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:padding="2dp"
                         android:textColor="@color/gray100"
@@ -135,36 +141,40 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_toEndOf="@+id/l1"
+                android:layout_toRightOf="@+id/l1"
                 android:alpha="0.7"
                 android:background="@color/gray300" />
 
             <LinearLayout
-                android:layout_marginStart="5dp"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/v2"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_toStartOf="@+id/imgWeather"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toStartOf="@+id/imgWeather"
+                android:layout_toLeftOf="@+id/imgWeather"
+                android:layout_toEndOf="@+id/v2"
+                android:layout_toRightOf="@+id/v2"
+                android:orientation="vertical"
                 tools:ignore="RelativeOverlap">
 
                 <TextView
                     android:id="@+id/day"
-                    android:layout_margin="5dp"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:text="@string/app_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/date"
-                    android:layout_margin="5dp"
-                    android:textColor="@color/gray50"
-                    android:textSize="16sp"
-                    android:text="@string/app_name"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/app_name"
+                    android:textColor="@color/gray50"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -173,9 +183,11 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
                 android:layout_marginBottom="5dp"
                 android:contentDescription="@string/app_name"
                 android:padding="3dp"
