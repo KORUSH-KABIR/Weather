@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class MainActivity extends SetupActivity {
     private boolean toolbarState = false;
     private ImageView iconText , exit , search , closeToolbarCity , btnSearch;
     private TextView temp , city , textWeather , speed , humidity , sunrise , sunset;
+    private EditText edtCity;
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
     private MaterialDialog dialog;
@@ -78,6 +80,7 @@ public class MainActivity extends SetupActivity {
         layoutToolbarSearch    = findViewById(R.id.layoutToolbarSearch);
         toolbar                = findViewById(R.id.toolbar);
         search                 = findViewById(R.id.search);
+        edtCity                = findViewById(R.id.edtCity);
         closeToolbarCity       = findViewById(R.id.closeToolbarCity);
         btnSearch              = findViewById(R.id.btnSearch);
         recyclerView           = findViewById(R.id.recyclerView);
@@ -239,6 +242,17 @@ public class MainActivity extends SetupActivity {
             @Override
             public void onClick(View v) {
 
+                if(edtCity.getText().toString().equals("")){
+                    edtCity.setError("please first enter your city");
+                }
+                else {
+                    preference.writeString(
+                            CITY_KEY,
+                            edtCity.getText().toString()
+                    );
+
+                    getResponseFromServer(getCity());
+                }
             }
         });
 

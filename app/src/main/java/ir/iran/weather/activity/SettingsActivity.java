@@ -15,11 +15,8 @@ import ir.iran.weather.R;
 
 public class SettingsActivity extends SetupActivity {
 
-    private static final String STATE_CHECKER = "checker";
-    private static final String STATE_OPENED = "opened";
     private static final String CITY_KEY = "City Location";
     private SharedPreferenceUtils preference;
-    private String state;
     private EditText edtCity;
     private Button btnSaveCity;
 
@@ -43,10 +40,6 @@ public class SettingsActivity extends SetupActivity {
     }
 
     private void init() {
-
-        Bundle bundle = getIntent().getExtras();
-        assert bundle != null;
-        state = bundle.getString("state");
 
         edtCity = findViewById(R.id.edtCity);
         btnSaveCity = findViewById(R.id.btnSaveCity);
@@ -72,6 +65,7 @@ public class SettingsActivity extends SetupActivity {
                     Intent intent = new Intent();
                     setResult(Activity.RESULT_OK , intent);
                     finish();
+                    overridePendingTransition(R.anim.animate_enter_to_activity, R.anim.animate_exit_of_activity);
                 }
             }
         });
@@ -79,17 +73,6 @@ public class SettingsActivity extends SetupActivity {
 
     @Override
     public void onBackPressed() {
-
-        switch(state){
-
-            case STATE_OPENED:
-                super.onBackPressed();
-                overridePendingTransition(R.anim.animate_enter_to_activity, R.anim.animate_exit_of_activity);
-                break;
-
-            case STATE_CHECKER:
-                Toast.makeText(this, "Please Enter Your City", Toast.LENGTH_SHORT).show();
-                break;
-        }
+        Toast.makeText(this, "Please Enter Your City", Toast.LENGTH_SHORT).show();
     }
 }
