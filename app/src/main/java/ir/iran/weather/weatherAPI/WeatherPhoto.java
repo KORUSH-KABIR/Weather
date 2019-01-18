@@ -64,6 +64,9 @@ public class WeatherPhoto {
             "snow showers"
     };
 
+    /**
+     * آیکون متن مورد نظر را برمیگرداند
+     */
     public static int getPhotoWeather(String text){
 
         if (isTrue(cloudy , text)){
@@ -86,6 +89,10 @@ public class WeatherPhoto {
         }
     }
 
+    /**
+     * در این متد برسی میشود که آیا این متن ورودی در لیست های نوشته شده وجود دارد یا خیر
+     * و در صورت وجود درجا مقدار true و در غیر این صورت مقدار false را برمیگرداند
+     */
     private static boolean isTrue(String[] list , String text){
 
         for(String aList : list){

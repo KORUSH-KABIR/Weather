@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.AnimRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -203,16 +204,16 @@ public class MainActivity extends SetupActivity {
         ///////////////////////////////////
 
         city.setText(cityText);
-        city.startAnimation(AnimationUtils.loadAnimation(this , R.anim.animate_city_title));
+        setAnimateForViews(city , R.anim.animate_city_title);
 
         iconText.setImageDrawable(getResources().getDrawable(WeatherPhoto.getPhotoWeather(weatherText)));
-        iconText.startAnimation(AnimationUtils.loadAnimation(this , R.anim.animate_icon_sky));
+        setAnimateForViews(iconText , R.anim.animate_icon_sky);
 
         textWeather.setText(weatherText);
-        textWeather.startAnimation(AnimationUtils.loadAnimation(this , R.anim.animate_text_sky));
+        setAnimateForViews(textWeather , R.anim.animate_text_sky);
 
         temp.setText(conditionTemp);
-        temp.startAnimation(AnimationUtils.loadAnimation(this , R.anim.animate_temp));
+        setAnimateForViews(temp , R.anim.animate_temp);
 
         speed.setText(speedSky);
         humidity.setText(humiditySky);
@@ -229,6 +230,10 @@ public class MainActivity extends SetupActivity {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(new ScaleInAnimationAdapter(animationAdapter));
+    }
+
+    private void setAnimateForViews(View view , @AnimRes int animate){
+        view.startAnimation(AnimationUtils.loadAnimation(this , animate));
     }
 
     private void initItems(){

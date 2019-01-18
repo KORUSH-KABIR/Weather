@@ -1,4 +1,3 @@
-
 package ir.iran.weather.weatherAPI;
 
 import com.google.gson.annotations.Expose;
