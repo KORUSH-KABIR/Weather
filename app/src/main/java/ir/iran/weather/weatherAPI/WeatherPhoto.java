@@ -34,6 +34,7 @@ public class WeatherPhoto {
             "sunny" ,
             "fair (night)" ,
             "clear (night)" ,
+            "clear" ,
             "fair (day)" ,
             "hot"
     };

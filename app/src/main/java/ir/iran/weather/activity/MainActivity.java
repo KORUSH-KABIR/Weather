@@ -99,7 +99,7 @@ public class MainActivity extends SetupActivity {
         humidity               = findViewById(R.id.humidity);
         sunrise                = findViewById(R.id.sunrise);
         sunset                 = findViewById(R.id.sunset);
-        fab                    = findViewById(R.id.floatActionButton);
+        fab                    = findViewById(R.id.fab);
         exit                   = findViewById(R.id.exit);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(
@@ -199,21 +199,21 @@ public class MainActivity extends SetupActivity {
 
         ///////////////////////////////////
 
-        dialog.dismiss();
+        dialog.dismiss(); // بعد از گرفتن تمام اطلاعات دیالوگ را میبندد
 
         ///////////////////////////////////
 
         city.setText(cityText);
-        setAnimateForViews(city , R.anim.animate_city_title);
+        setAnimateForViews(city , R.anim.animate_city_title); // تنظیم انیمیشن برای این ویو
 
         iconText.setImageDrawable(getResources().getDrawable(WeatherPhoto.getPhotoWeather(weatherText)));
-        setAnimateForViews(iconText , R.anim.animate_icon_sky);
+        setAnimateForViews(iconText , R.anim.animate_icon_sky); // تنظیم انیمیشن برای این ویو
 
         textWeather.setText(weatherText);
-        setAnimateForViews(textWeather , R.anim.animate_text_sky);
+        setAnimateForViews(textWeather , R.anim.animate_text_sky); // تنظیم انیمیشن برای این ویو
 
         temp.setText(conditionTemp);
-        setAnimateForViews(temp , R.anim.animate_temp);
+        setAnimateForViews(temp , R.anim.animate_temp); // تنظیم انیمیشن برای این ویو
 
         speed.setText(speedSky);
         humidity.setText(humiditySky);
@@ -232,6 +232,9 @@ public class MainActivity extends SetupActivity {
         recyclerView.setAdapter(new ScaleInAnimationAdapter(animationAdapter));
     }
 
+    /**
+     * برای ویو یک انیمیشن تنظیم میکند
+     */
     private void setAnimateForViews(View view , @AnimRes int animate){
         view.startAnimation(AnimationUtils.loadAnimation(this , animate));
     }

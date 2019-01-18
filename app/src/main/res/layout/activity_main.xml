@@ -405,18 +405,17 @@
     </android.support.v7.widget.CardView>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatActionButton"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16sp"
-        android:backgroundTint="@color/white"
+        android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
+        app:backgroundTint="@color/colorAccent"
         android:src="@drawable/icon_refresh"
-        android:tint="@color/colorPrimary"
-        app:borderWidth="2dp"
+        app:borderWidth="5dp"
         app:elevation="2dp"
         app:fabSize="normal"
         app:rippleColor="#000" />
