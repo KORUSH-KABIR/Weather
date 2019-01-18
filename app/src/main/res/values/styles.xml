@@ -81,8 +81,4 @@
         <item name="colorControlHighlight">@color/black</item>
     </style>
 
-    <style name="tabLayoutTextFont" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <item name="android:fontFamily">@font/exo2_bold</item>
-    </style>
-
 </resources>
