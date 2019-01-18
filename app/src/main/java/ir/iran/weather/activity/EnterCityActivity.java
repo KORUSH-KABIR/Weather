@@ -13,6 +13,11 @@ import ir.aid.library.Frameworks.setup.SetupActivity;
 import ir.aid.library.Frameworks.utils.SharedPreferenceUtils;
 import ir.iran.weather.R;
 
+/*
+ برای این که صفحه به پشت آیکون های نوار ابزار هم برود *
+ و تمام صفحه نیز باشد از کلاس SetupActivity که از *
+ کتابخانه korush kabir گرفته شده است استفاده میکنیم *
+ */
 public class EnterCityActivity extends SetupActivity {
 
     private static final String CITY_KEY = "City Location";
@@ -73,6 +78,7 @@ public class EnterCityActivity extends SetupActivity {
 
     @Override
     public void onBackPressed() {
+        // تا زمانی که شهر را وارد نکنید اجازه ورود به برنامه را ندارد
         Toast.makeText(this, "Please Enter Your City", Toast.LENGTH_SHORT).show();
     }
 }

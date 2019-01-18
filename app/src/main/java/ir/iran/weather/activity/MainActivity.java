@@ -36,6 +36,12 @@ import jp.wasabeef.recyclerview.adapters.SlideInLeftAnimationAdapter;
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator;
 import jp.wasabeef.recyclerview.animators.SlideInLeftAnimator;
 
+/*
+ برای این که صفحه به پشت آیکون های نوار ابزار هم برود *
+ و تمام صفحه نیز باشد از کلاس SetupActivity که از *
+ کتابخانه korush kabir گرفته شده است استفاده میکنیم *
+ */
+
 public class MainActivity extends SetupActivity {
 
     private static final String CITY_KEY = "City Location";
