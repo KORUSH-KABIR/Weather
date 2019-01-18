@@ -260,8 +260,6 @@ public class MainActivity extends SetupActivity {
                             edtCity.getText().toString()
                     );
 
-                    edtCity.setText("");
-                    
                     getResponseFromServer(getCity());
                 }
             }
@@ -319,6 +317,7 @@ public class MainActivity extends SetupActivity {
                         if(toolbarState){
                             layoutToolbarSearch.setVisibility(View.GONE);
                             layoutToolbarBase.setVisibility(View.VISIBLE);
+                            edtCity.setText("");
                             toolbarState = false;
                         }
                         else{
