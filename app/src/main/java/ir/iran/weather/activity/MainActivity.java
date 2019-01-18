@@ -477,22 +477,23 @@ public class MainActivity extends SetupActivity {
     @Override
     public void onBackPressed() {
 
-        if(toolbarState){
+        if(toolbarState){ // اگر تولبار باز شده باشد آنرا میبندد
             toolbarAnimationStart();
         }
-        else if(!exitState){
-            exitState = true;
+        else if(!exitState){ // اگر قبلا روی دکمه برگشت زده نشده بود
+            exitState = true; // وضعیت دکمه به حالت زده شده تغییر میکند
 
-            Toast.makeText(this, "please try again for exit", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "please try again for exit", Toast.LENGTH_SHORT).show(); // نمایش یک پیغام ضربه مجدد
 
             new Handler().postDelayed(new Runnable() {
                 @Override
-                public void run() {
+                public void run() { // اگر تا دو ثانیه روی دکمه برگشت زده نشود وضعیت را به زده نشده تغییر میدهد
                     exitState = false;
                 }
             } , 2000);
         }
         else {
+            // اگر قبل از دوثانیه روی دکمه دوباره زده شود برنامه را میبندد
             super.onBackPressed();
         }
     }
