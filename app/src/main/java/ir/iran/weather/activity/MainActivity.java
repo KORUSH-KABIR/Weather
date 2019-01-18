@@ -477,7 +477,10 @@ public class MainActivity extends SetupActivity {
     @Override
     public void onBackPressed() {
 
-        if(!exitState){
+        if(toolbarState){
+            toolbarAnimationStart();
+        }
+        else if(!exitState){
             exitState = true;
 
             Toast.makeText(this, "please try again for exit", Toast.LENGTH_SHORT).show();
