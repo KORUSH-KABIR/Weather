@@ -133,26 +133,31 @@ public class MainActivity extends SetupActivity {
         initItems();
     }
 
+    /**
+     * یک string به عنوان ورودی میکرد که بر اساس آن اطلاعات شهر مورد نظر را دریافت میکند
+     */
     private void getResponseFromServer(String city){
 
-        dialog.show();
+        dialog.show(); // نمایش یک پیغام بارگیری
 
-        if(toolbarState){
+        if(toolbarState){ // اگر تولبار باز بود آن را ببند
             toolbarAnimationStart();
         }
 
+        // آدرس بارگیری اطلاعات از اینترنت
         String url = "http://phoenix-iran.ir/Files_php_App/WeatherApi/newApiWeather.php";
 
+        // ساخت یک ارتباط به اینترنت برای دریافت اطلاعات از اینترنت
         new ConnectionHelper(url , 5000)
-                .addStringRequest("city" , city)
-                .addStringRequest("unit" , "c")
+                .addStringRequest("city" , city) // ارسال اسم شهر به سرور
+                .addStringRequest("unit" , "c") // دریافت اطلاعات مبتنی بر سانتی گراد
                 .getResponse(new OnGetResponse() {
                     @Override
                     public void notConnection(final String result) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if(reconnectCount < 5){
+                                if(reconnectCount < 5){ // تا 5 بار اتصال به اینترنت برسی میشود و اگر بر قرار نشد پیام خطا در اتصال را نشان میدهد
                                     reconnectCount ++;
                                     initCity();
                                 }
