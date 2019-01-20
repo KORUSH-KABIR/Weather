@@ -72,7 +72,7 @@ public class MainActivity extends SetupActivity {
     private void initCity(){
 
         if(getCity().equals("")){ // برسی میکند که آیا شهری از قبل در پرفرنس ذخیره شده است یا خیر
-            initIntent(); // در صورت عدم وجود شهر به اکتیویتی بعدی میرود
+            initIntent(); // در صورت عدم وجود شهر به اکتیویتی وارد کردن شهر میرود
         }
         else {
             getResponseFromServer(getCity()); // اگر شهر وجود داشت پس اطلاعات آن را بارگیری میکند
@@ -134,7 +134,7 @@ public class MainActivity extends SetupActivity {
     }
 
     /**
-     * یک string به عنوان ورودی میکرد که بر اساس آن اطلاعات شهر مورد نظر را دریافت میکند
+     * یک string به عنوان ورودی میگیرد که بر اساس آن اطلاعات شهر مورد نظر را دریافت میکند
      */
     private void getResponseFromServer(String city){
 
@@ -153,7 +153,7 @@ public class MainActivity extends SetupActivity {
                 .addStringRequest("unit" , "c") // دریافت اطلاعات مبتنی بر سانتی گراد
                 .getResponse(new OnGetResponse() {
                     @Override
-                    public void notConnection(final String result) {
+                    public void notConnection(final String result) { // اگر اتصال برقرار نشد این متد فراخانی میشود
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -170,19 +170,29 @@ public class MainActivity extends SetupActivity {
                     }
 
                     @Override
-                    public void success(final String result) {
+                    public void success(final String result) { // اگر مقدار برگشتی وجود داشت این متد صدا زده میشود
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if(result.equalsIgnoreCase("null")){
+                                if(result.equalsIgnoreCase("null")){ // اگر شهر پیدا نشد این قسمت صدا زده میشود
+
+                                    // نمایش یک پیغام به کاربر
                                     Toast.makeText(MainActivity.this, "the city in question was not found", Toast.LENGTH_SHORT).show();
+
+                                    // بسته شدن دیالوگ
                                     dialog.dismiss();
+
+                                    // و رفتن به صفحه ی وارد کردن شهر و مقدار صحیح
                                     initIntent();
                                 }
-                                else {
-                                    Gson gson = new Gson();
+                                else { // اگر شهر وجود داشت این قسمت را باز خواهد کرد
+
+                                    Gson gson = new Gson(); // ساخت یک نمئنه از کلاس Gson برای تجزیه و تحلیل جیسون دریافتی
+
+                                    // مدل هایی از جیسون دریافتی را میسازیم
                                     YahooWeatherAPI api = gson.fromJson(result , YahooWeatherAPI.class);
-                                    initItemsData(api);
+
+                                    initItemsData(api); // مقدار مدل را به متد تجزیه و تحلیل اطلاعات میفرستیم
                                 }
                             }
                         });
@@ -190,16 +200,19 @@ public class MainActivity extends SetupActivity {
 
                     @Override
                     public void nullable(String result) {
-
+                        // این متد عملکردی نداشته و در واقع فراموش کردم از داخل کلاس ConnectionHelper حذفش کنم
                     }
                 });
     }
 
     private void initItemsData(YahooWeatherAPI api){
 
+        // ساخت یک نمونه آداپتر برای لیست اطلاعات آب و هوای چند روز آینده
         ForecastsAdapter adapter = new ForecastsAdapter(this, api);
 
+        //////
         // تمام اطلاهات دریافتی را از Api ورودی گرفته و در مقادیر های مورد نیاز نگهداری میکنیم
+        //////
 
         // اسم شهر جستوجو شده
         String cityName = api.getResult().getLocation().getCity();
