@@ -205,6 +205,9 @@ public class MainActivity extends SetupActivity {
                 });
     }
 
+    /**
+     * اطلاعات وارد شده از سمت سرور را تجزیه و تحلیل میکند
+     */
     private void initItemsData(YahooWeatherAPI api){
 
         // ساخت یک نمونه آداپتر برای لیست اطلاعات آب و هوای چند روز آینده
