@@ -287,14 +287,14 @@ public class MainActivity extends SetupActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getResponseFromServer(getCity());
+                getResponseFromServer(getCity()); // برسی مجدد و گرفتن دوباره اطلاعات
             }
         });
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolbarAnimationStart();
+                toolbarAnimationStart(); // 
             }
         });
 
