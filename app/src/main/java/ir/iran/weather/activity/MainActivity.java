@@ -282,6 +282,9 @@ public class MainActivity extends SetupActivity {
         view.startAnimation(AnimationUtils.loadAnimation(this , animate));
     }
 
+    /**
+     * عملکرد های دکمه ها را تنظیم مینماید
+     */
     private void initItems(){
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -294,14 +297,14 @@ public class MainActivity extends SetupActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolbarAnimationStart(); // 
+                toolbarAnimationStart(); // تولبار جستوجو را باز میکند
             }
         });
 
         closeToolbarCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toolbarAnimationStart();
+                toolbarAnimationStart(); // تولبار جستوجو را میبندد
             }
         });
 
@@ -309,15 +312,17 @@ public class MainActivity extends SetupActivity {
             @Override
             public void onClick(View v) {
 
-                if(edtCity.getText().toString().equals("")){
+                if(edtCity.getText().toString().equals("")){ // اگر داخل EditText خالی بود یک متن خطا را نشان میدهد
                     edtCity.setError("please first enter your city");
                 }
                 else {
+                    // شهر را ذخیره میکن
                     preference.writeString(
                             CITY_KEY,
                             edtCity.getText().toString()
                     );
 
+                    // اطلاعات شهر را میگیرد
                     getResponseFromServer(getCity());
                 }
             }
@@ -331,6 +336,9 @@ public class MainActivity extends SetupActivity {
         });
     }
 
+    /**
+     * تولبار را به پایین میاورد
+     */
     private void toolbarAnimationStart(){
 
         toolbar.animate().setDuration(300)
@@ -343,6 +351,7 @@ public class MainActivity extends SetupActivity {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        // بعد از پایان انیمیشن ابن انیمیشن را اجرا کن
                         toolbarAnimationRotateOne();
                     }
 
@@ -359,6 +368,9 @@ public class MainActivity extends SetupActivity {
                 .start();
     }
 
+    /**
+     * تولبار را 90 درجه در محور x میچرخاند
+     */
     private void toolbarAnimationRotateOne(){
 
         toolbar.animate().setDuration(220)
@@ -371,19 +383,21 @@ public class MainActivity extends SetupActivity {
 
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        // بعد از پایان انیمیشن این کار ها را انجام داده و سپس انیمیشن بعدی را اجرا میکند
 
-                        if(toolbarState){
+                        if(toolbarState){ // اگر تولبار باز بود
                             layoutToolbarSearch.setVisibility(View.GONE);
                             layoutToolbarBase.setVisibility(View.VISIBLE);
                             edtCity.setText("");
                             toolbarState = false;
                         }
-                        else{
+                        else{ // اگر تولبار بسته بود
                             layoutToolbarSearch.setVisibility(View.VISIBLE);
                             layoutToolbarBase.setVisibility(View.GONE);
                             toolbarState = true;
                         }
 
+                        // اجرای انیمیشن بعدی
                         toolbarAnimationRotateTwo();
                     }
 
@@ -400,6 +414,9 @@ public class MainActivity extends SetupActivity {
                 .start();
     }
 
+    /**
+     * تولبار را در محور x مجدد 90 درجه بر میگرداند
+     */
     private void toolbarAnimationRotateTwo(){
 
         toolbar.animate().setDuration(220)
@@ -428,6 +445,9 @@ public class MainActivity extends SetupActivity {
                 .start();
     }
 
+    /**
+     * تولبار را به سر جای اول خود بر میگرداند
+     */
     private void toolbarAnimationEnd(){
 
         toolbar.animate().setDuration(200)
@@ -456,6 +476,9 @@ public class MainActivity extends SetupActivity {
                 .start();
     }
 
+    /**
+     * دیالوگ را مقدار دهی میکند
+     */
     private void initDialog(){
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
@@ -466,6 +489,9 @@ public class MainActivity extends SetupActivity {
         dialog = builder.build();
     }
 
+    /**
+     * به صفحه ی وارد کردن شهر میرود
+     */
     private void initIntent(){
         startActivityForResult(
                 new Intent(MainActivity.this , EnterCityActivity.class),
@@ -478,8 +504,8 @@ public class MainActivity extends SetupActivity {
     protected void onStart() {
         super.onStart();
         setNotificationBar(); //  برای تمام صفحه کردن صفحه از کلاس والد گرفته میشود
-        initDialog();
-        initCity();
+        initDialog(); // دیالوگ را شناسایی میکند
+        initCity(); // شهر را برسی میکند
     }
 
     @Override
@@ -487,7 +513,7 @@ public class MainActivity extends SetupActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode == SETTINGS_REQUEST_CODE &&
-                resultCode == Activity.RESULT_OK){
+                resultCode == Activity.RESULT_OK){ // اگر شهر را کاربر صحیح وارد کرده بود اطلاعات را بارگیری میکند
 
             getResponseFromServer(getCity());
         }
